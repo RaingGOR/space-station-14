@@ -1,0 +1,109 @@
+﻿- type: entity
+  name: Goliaf
+  id: MobGoliaf(Raingor)
+  parent: SimpleSpaceMobBase
+  description: A massive creature with powerful jaws and intimidating spikes on its back.
+  components:
+  - type: HTN
+    rootTask: SimpleHostileCompound
+  - type: Faction
+    factions:
+    - SimpleHostile
+  - type: Sprite
+    drawdepth: Mobs
+    netsync: false
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeCircle
+        radius: 0.40
+      density: 100
+      mask:
+      - MobMask
+      layer:
+      - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      250: Critical
+      300: Dead
+  - type: Stamina
+    excess: 150
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: bear
+        BaseUnshaded: glow
+      Critical:
+        Base: bear_dead
+      Dead:
+        Base: bear_dead
+  - type: Butcherable
+    spawned:
+    - id: FoodMeatBear
+      amount: 3
+    - id: MaterialHideBear
+      amount: 1
+      prob: 0.3
+  - type: Bloodstream
+    bloodMaxVolume: 300
+    bloodReagent: Cryoxadone
+  - type: CombatMode
+  - type: Temperature
+    heatDamageThreshold: 500
+    coldDamageThreshold: 0
+  - type: MeleeWeapon
+    hidden: true
+    soundHit:
+        path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Brute: 25
+        Slash: 40
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - FootstepSound
+  - type: Puller
+    needsHands: false
+  - type: ReplacementAccent
+    accent: genericAggressive
+  - type: Vocal
+    sounds:
+      Unsexed: Bear
+  - type: InteractionPopup
+    successChance: 0.25
+    interactSuccessString: petting-success-bear
+    interactFailureString: petting-failure-bear
+    interactSuccessSound:
+      path: /Audio/Animals/sloth_squeak.ogg
+  - type: PointLight
+    radius: 1.2
+    energy: 2
+    color: "#4faffb"
+  - type: GhostRole
+    prob: 0.25
+    name: space Goliaf
+    description: |
+      You're a Goliaf! Kill people!
+  - type: GhostTakeoverAvailable
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      0: 0.85
+      150: 0.5
+      75: 1.3
+
+- type: entity
+  id: MobGoliafSpaceSalvage
+  parent: MobGoliaf(Raingor)
+  suffix: "Salvage Ruleset"
+  components:
+  - type: GhostRole
+    prob: 0.25
+    name: space Goliaf on salvage wreck
+    description: |
+      Defend the loot inside the salvage wreck!
+  - type: GhostTakeoverAvailable
+  - type: SalvageMobRestrictions
