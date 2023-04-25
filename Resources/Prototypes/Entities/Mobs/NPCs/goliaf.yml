@@ -11,7 +11,14 @@
     - SimpleHostile
   - type: Sprite
     drawdepth: Mobs
+    spite: Mobs/Animals/goliath.rsi
     netsync: false
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: bear
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
   - type: Fixtures
     fixtures:
     - shape:
@@ -32,12 +39,11 @@
   - type: DamageStateVisuals
     states:
       Alive:
-        Base: bear
-        BaseUnshaded: glow
+        Base: goliath
       Critical:
-        Base: bear_dead
+        Base: goliath_dead
       Dead:
-        Base: bear_dead
+        Base: goliath_dead
   - type: Butcherable
     spawned:
     - id: FoodMeatBear
